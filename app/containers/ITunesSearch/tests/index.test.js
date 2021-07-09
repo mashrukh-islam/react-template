@@ -11,13 +11,13 @@ import { renderProvider } from '@utils/testUtils';
 import { ITunesSearchTest as ITunesSearch } from '../index';
 
 describe('<ITunesSearch /> container tests', () => {
-  // let submitSpy
+  let submitSpy;
 
   beforeEach(() => {
-    // submitSpy = jest.fn()
+    submitSpy = jest.fn();
   });
   it('should render and match the snapshot', () => {
-    const { baseElement } = renderProvider(<ITunesSearch />);
+    const { baseElement } = renderProvider(<ITunesSearch dispatchFetchTracks={submitSpy} />);
     expect(baseElement).toMatchSnapshot();
   });
 });

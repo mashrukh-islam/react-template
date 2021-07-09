@@ -26,19 +26,12 @@ const Container = styled.div`
   && {
     display: flex;
     flex-direction: column;
-    max-width: ${props => props.maxWidth}px;
+    max-width: ${props => props.maxWidth}em;
     width: 100%;
     margin: 0 auto;
   }
 `;
-export function ITunesSearch({
-  maxWidth,
-  dispatchFetchTracks,
-  dispatchClearTracks,
-  artistName,
-  tracks = {},
-  tracksError = null
-}) {
+export function ITunesSearch({ maxWidth, dispatchFetchTracks, dispatchClearTracks, artistName, tracks, tracksError }) {
   useInjectSaga({ key: 'iTunesSearch', saga });
   const [loading, setLoading] = useState(false);
 
@@ -50,7 +43,7 @@ export function ITunesSearch({
   }, [tracks]);
 
   useEffect(() => {
-    if (artistName && !tracks?.items?.length) {
+    if (artistName && !tracks?.results?.length) {
       dispatchFetchTracks(artistName);
       setLoading(true);
     }
@@ -104,7 +97,9 @@ ITunesSearch.propTypes = {
 };
 
 ITunesSearch.defaultProps = {
-  maxWidth: 500
+  maxWidth: 50,
+  tracks: {},
+  tracksError: null
 };
 
 const mapStateToProps = createStructuredSelector({
