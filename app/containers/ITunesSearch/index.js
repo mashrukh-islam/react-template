@@ -20,6 +20,7 @@ import { makeSelectITunesSearch, selectArtistName, selectTracksData, selectTrack
 import For from '@components/For';
 import { iTunesSearchCreators } from './reducer';
 import saga from './saga';
+import TrackCard from '@components/TrackCard';
 
 const { Search } = Input;
 
@@ -69,7 +70,7 @@ export function ITunesSearch({ maxWidth, dispatchFetchTracks, dispatchClearTrack
             noParent
             of={trackList}
             renderItem={(track, index) => {
-              return <p key={index}>{track.kind}</p>;
+              return <TrackCard key={index} track={track} />;
             }}
           />
         </Skeleton>
