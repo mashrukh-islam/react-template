@@ -1,8 +1,8 @@
 export default {
-  repos: {
+  tracks: {
     route: '/',
     props: {
-      maxwidth: 500,
+      maxwidth: 50,
       padding: 20
     },
     exact: true
