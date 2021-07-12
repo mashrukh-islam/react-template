@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TrackCard /> should render and match the snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="TrackCard__Container-sc-10bk196-0 gbDfdX"
+      data-testid="track-card"
+    >
+      <div
+        class="ant-card ant-card-bordered"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-extra"
+            >
+              <a
+                href="/track/undefined"
+              >
+                See More
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="TrackCard__Row-sc-10bk196-1 fzZKLG"
+          >
+            <div
+              class="TrackCard__Col-sc-10bk196-2 pAANT"
+              size="1"
+            >
+              <div
+                class="ant-card-meta"
+              >
+                <div
+                  class="ant-card-meta-avatar"
+                >
+                  <span
+                    class="ant-avatar ant-avatar-circle"
+                    style="width: 100px; height: 100px; line-height: 100px; font-size: 18px;"
+                  >
+                    <span
+                      class="ant-avatar-string"
+                      style="opacity: 0;"
+                    />
+                  </span>
+                </div>
+                <div
+                  class="ant-card-meta-detail"
+                >
+                  <div
+                    class="ant-card-meta-description"
+                  >
+                    <div
+                      class="ant-statistic"
+                    >
+                      <div
+                        class="ant-statistic-title"
+                      >
+                        Price
+                      </div>
+                      <div
+                        class="ant-statistic-content"
+                      >
+                        <span
+                          class="ant-statistic-content-value"
+                        >
+                          <span
+                            class="ant-statistic-content-value-int"
+                          >
+                            
+                            0
+                          </span>
+                          
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="TrackCard__Col-sc-10bk196-2 fRSYFB"
+            >
+              <div
+                class="ant-card-meta"
+              >
+                <div
+                  class="ant-card-meta-detail"
+                >
+                  <div
+                    class="ant-card-meta-title"
+                  >
+                    <p
+                      class="T__StyledText-gjlic1-0 cbAvsY"
+                      data-testid="t"
+                    >
+                      Performed By : 
+                    </p>
+                  </div>
+                  <div
+                    class="ant-card-meta-description"
+                  >
+                    <div
+                      class="ant-statistic"
+                    >
+                      <div
+                        class="ant-statistic-title"
+                      >
+                        Released
+                      </div>
+                      <div
+                        class="ant-statistic-content"
+                      >
+                        <span
+                          class="ant-statistic-content-value"
+                        >
+                          Invalid Date
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
