@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import { compose } from 'redux';
 import { useInjectSaga } from '@utils/injectSaga';
 import { makeSelectITunesSearch, selectArtistName, selectTracksData, selectTracksError } from './selectors';
+import For from '@components/For';
 import { iTunesSearchCreators } from './reducer';
 import saga from './saga';
 
@@ -62,11 +63,15 @@ export function ITunesSearch({ maxWidth, dispatchFetchTracks, dispatchClearTrack
   const renderTracks = () => {
     const trackList = get(tracks, 'results', []);
     return (
-      (trackList.length !== 0 || loading) && (
+      (trackList.length || loading) && (
         <Skeleton loading={loading} active>
-          {trackList.map((item, index) => (
-            <p key={index}>{item.kind}</p>
-          ))}
+          <For
+            noParent
+            of={trackList}
+            renderItem={(track, index) => {
+              return <p key={index}>{track.kind}</p>;
+            }}
+          />
         </Skeleton>
       )
     );
