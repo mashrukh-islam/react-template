@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'antd';
+import { Card, Statistic, Avatar } from 'antd';
 import styled from 'styled-components';
 import ReactPlayer from 'react-player/lazy';
 import If from '@components/If';
@@ -18,13 +18,6 @@ const Container = styled.div`
     flex-direction: column;
     width: 100%;
     margin-bottom: ${props => props.padding}em;
-  }
-`;
-const CustomImage = styled.img`
-  && {
-    height: 100px;
-    width: 100px;
-    padding: 10px;
   }
 `;
 
@@ -47,23 +40,25 @@ const CustomPlayer = styled(ReactPlayer)`
     width: 100%;
   }
 `;
+
 const { Meta } = Card;
 function TrackCard({ track, padding }) {
   const albumName = track.collectionCensoredName;
   const artistName = track.artistName;
   return (
     <Container data-testid="track-card" padding={padding}>
-      <Card cover={<CustomImage src={track.artworkUrl100} />}>
-        <Meta title={track.trackName} description={albumName} />
+      <Card title={track.trackName} extra={<a href={`/track/${track.trackId}`}>See More</a>}>
+        <Meta
+          avatar={<Avatar src={track.artworkUrl100} size={100} />}
+          title={albumName}
+          description={<Statistic title="Price" value={track.trackPrice} suffix={track.currency} />}
+        />
         <Row>
           <Col size={1}>
             <T id="performed_by" values={{ artistName }} />
           </Col>
-          <Col size={0.5}>
-            <p>
-              {track.trackPrice}
-              {track.currency}
-            </p>
+          <Col size={1}>
+            <Statistic title="Released" value={new Date(track.releaseDate).toLocaleDateString()} />
           </Col>
         </Row>
         <If condition={track.previewUrl} otherwise={null}>
