@@ -70,7 +70,7 @@ export function ITunesSearch({ maxWidth, dispatchFetchTracks, dispatchClearTrack
             noParent
             of={trackList}
             renderItem={(track, index) => {
-              return <TrackCard key={index} track={track} />;
+              return <TrackCard key={index} track={track} padding={0.5} />;
             }}
           />
         </Skeleton>
