@@ -48,17 +48,19 @@ function TrackCard({ track, padding }) {
   return (
     <Container data-testid="track-card" padding={padding}>
       <Card title={track.trackName} extra={<a href={`/track/${track.trackId}`}>See More</a>}>
-        <Meta
-          avatar={<Avatar src={track.artworkUrl100} size={100} />}
-          title={albumName}
-          description={<Statistic title="Price" value={track.trackPrice} suffix={track.currency} />}
-        />
         <Row>
           <Col size={1}>
-            <T id="performed_by" values={{ artistName }} />
+            <Meta
+              avatar={<Avatar src={track.artworkUrl100} size={100} />}
+              title={albumName}
+              description={<Statistic title="Price" value={track.trackPrice} suffix={track.currency} />}
+            />
           </Col>
-          <Col size={1}>
-            <Statistic title="Released" value={new Date(track.releaseDate).toLocaleDateString()} />
+          <Col size={0.5}>
+            <Meta
+              title={<T id="performed_by" values={{ artistName }} />}
+              description={<Statistic title="Released" value={new Date(track.releaseDate).toLocaleDateString()} />}
+            />
           </Col>
         </Row>
         <If condition={track.previewUrl} otherwise={null}>
