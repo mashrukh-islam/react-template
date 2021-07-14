@@ -10,11 +10,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
+import { Card, Statistic } from 'antd';
 import { useParams } from 'react-router-dom';
 import { compose } from 'redux';
 import { useInjectSaga } from '@utils/injectSaga';
 import { iTunesProviderCreators } from '../reducer';
-import { Card, Statistic } from 'antd';
+import T from '@components/T';
 import { makeSelectITunesProvider, selectTrackDetails, selectTrackId, selectTrackDetailsError } from '../selectors';
 import saga from '../saga';
 
@@ -68,13 +69,13 @@ export function TrackDetailsContainer({
         cover={<img src={trackDetails.artworkUrl100} />}
         actions={[
           <a href={trackDetails.artistViewUrl} key="artist">
-            View Artist
+            <T id="view_artist" />
           </a>,
           <a href={trackDetails.collectionViewUrl} key="artist">
-            View Album
+            <T id="view_album" />
           </a>,
           <a href={trackDetails.trackViewUrl} key="artist">
-            View Track
+            <T id="view_track" />
           </a>
         ]}
       >

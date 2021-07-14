@@ -12,5 +12,8 @@
   "repository_stars": "Repository stars: {stars}",
   "wednesday_solutions": "Wednesday Solutions",
   "album_name": "Album :  {albumName}",
-  "performed_by": "Performed By : {artistName}"
+  "performed_by": "Performed By : {artistName}",
+  "view_artist": "View Artist",
+  "view_album": "View Album",
+  "view_track": "View Track"
 }
