@@ -47,7 +47,14 @@ function TrackCard({ track, padding }) {
   const artistName = track.artistName;
   return (
     <Container data-testid="track-card" padding={padding}>
-      <Card title={track.trackName} extra={<a href={`/track/${track.trackId}`}>See More</a>}>
+      <Card
+        title={track.trackName}
+        extra={
+          <a href={`/track/${track.trackId}`}>
+            <T id="see_more" />
+          </a>
+        }
+      >
         <Row>
           <Col size={1}>
             <Meta

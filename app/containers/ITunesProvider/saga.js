@@ -30,6 +30,7 @@ export function* fetchTrackDetails(action) {
     const { data, ok } = response;
     if (ok) {
       yield put(successGetTrackDetails(data.results[0]));
+      yield put(successGetTrackNames(data.results[0]));
     } else {
       yield put(failureGetTrackDetails(data));
     }

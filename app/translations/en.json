@@ -15,5 +15,12 @@
   "performed_by": "Performed By : {artistName}",
   "view_artist": "View Artist",
   "view_album": "View Album",
-  "view_track": "View Track"
+  "view_track": "View Track",
+  "see_more": "See More",
+  "track_name": "Track Name",
+  "album": "Album",
+  "track_time": "Track Time",
+  "genre": "Genre",
+  "explicitness": "Explicitness",
+  "artist": "Artist"
 }

@@ -22,7 +22,12 @@ exports[`<TrackCard /> should render and match the snapshot 1`] = `
               <a
                 href="/track/undefined"
               >
-                See More
+                <p
+                  class="T__StyledText-gjlic1-0 cbAvsY"
+                  data-testid="t"
+                >
+                  See More
+                </p>
               </a>
             </div>
           </div>

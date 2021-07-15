@@ -43,17 +43,15 @@ export function TrackDetailsContainer({
   trackDetails,
   maxWidth,
   trackDetailsError,
-  trackId,
   dispatchClearTrackDetails,
   dispatchFetchTrackDetails
 }) {
   const [loading, setLoading] = useState(true);
   useInjectSaga({ key: 'iTunesProvider', saga });
-  const params = useParams();
+  const { trackId } = useParams();
 
   useEffect(() => {
     if (loading) {
-      trackId = params.trackId;
       dispatchFetchTrackDetails(trackId);
       setLoading(false);
     }
@@ -81,20 +79,20 @@ export function TrackDetailsContainer({
       >
         <Row>
           <Col size={1}>
-            <Statistic title="Track Name" value={trackDetails.trackCensoredName} />
-            <Statistic title="Album" value={trackDetails.collectionName} />
+            <Statistic title={<T id="track_name" />} value={trackDetails.trackCensoredName} />
+            <Statistic title={<T id="album" />} value={trackDetails.collectionName} />
           </Col>
           <Col size={1}>
-            <Statistic title="Track Time" value={renderTrackTime(trackDetails.trackTimeMillis)} />
-            <Statistic title="Genre" value={trackDetails.primaryGenreName} />
+            <Statistic title={<T id="track_time" />} value={renderTrackTime(trackDetails.trackTimeMillis)} />
+            <Statistic title={<T id="genre" />} value={trackDetails.primaryGenreName} />
           </Col>
         </Row>
         <Row>
           <Col size={1}>
-            <Statistic title="Explicitness" value={trackDetails.trackExplicitness} />
+            <Statistic title={<T id="explicitness" />} value={trackDetails.trackExplicitness} />
           </Col>
           <Col size={1}>
-            <Statistic title="Artist" value={trackDetails.artistName} />
+            <Statistic title={<T id="artist" />} value={trackDetails.artistName} />
           </Col>
         </Row>
       </Card>
@@ -105,8 +103,39 @@ export function TrackDetailsContainer({
 TrackDetailsContainer.propTypes = {
   dispatchFetchTrackDetails: PropTypes.func,
   dispatchClearTrackDetails: PropTypes.func,
-  trackId: PropTypes.string,
-  trackDetails: PropTypes.object,
+  trackDetails: PropTypes.shape({
+    artistId: PropTypes.number,
+    artistName: PropTypes.string,
+    artistViewUrl: PropTypes.string,
+    artworkUrl30: PropTypes.string,
+    artworkUrl60: PropTypes.string,
+    artworkUrl100: PropTypes.string,
+    collectionCensoredName: PropTypes.string,
+    collectionExplicitness: PropTypes.string,
+    collectionId: PropTypes.number,
+    collectionName: PropTypes.string,
+    collectionPrice: PropTypes.number,
+    collectionViewUrl: PropTypes.string,
+    country: PropTypes.string,
+    currency: PropTypes.string,
+    discCount: PropTypes.number,
+    discNumber: PropTypes.number,
+    isStreamable: PropTypes.bool,
+    kind: PropTypes.string,
+    previewUrl: PropTypes.string,
+    primaryGenreName: PropTypes.string,
+    releaseDate: PropTypes.string,
+    trackCensoredName: PropTypes.string,
+    trackCount: PropTypes.number,
+    trackExplicitness: PropTypes.string,
+    trackId: PropTypes.number,
+    trackName: PropTypes.string,
+    trackNumber: PropTypes.number,
+    trackPrice: PropTypes.number,
+    trackTimeMillis: PropTypes.number,
+    trackViewUrl: PropTypes.string,
+    wrapperType: PropTypes.string
+  }),
   trackDetailsError: PropTypes.object,
   maxWidth: PropTypes.number
 };
