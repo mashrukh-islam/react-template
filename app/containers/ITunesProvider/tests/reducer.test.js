@@ -42,4 +42,57 @@ describe('ITunesProvider reducer tests', () => {
       })
     ).toEqual(expectedResult);
   });
+
+  it('should return error message when action of type FAILURE_GET_TRACK_NAMES is dispatched', () => {
+    const error = { message: 'Internal Server Error' };
+    const expectedResult = { ...state, tracksError: error.message };
+    expect(
+      iTunesProviderReducer(state, {
+        type: iTunesProviderTypes.FAILURE_GET_TRACK_NAMES,
+        error
+      })
+    ).toEqual(expectedResult);
+  });
+
+  it('should return initial state when action of type REQUEST_GET_TRACK_DETAILS is dispatched', () => {
+    const trackId = 123456;
+    const expectedResult = { ...state, trackId };
+    expect(
+      iTunesProviderReducer(state, {
+        type: iTunesProviderTypes.REQUEST_GET_TRACK_DETAILS,
+        trackId
+      })
+    ).toEqual(expectedResult);
+  });
+
+  it('should ensure track details are present when action of type SUCCESS_GET_TRACK_DETAILS is dispatched', () => {
+    const data = { resultCount: 0, results: [] };
+    const expectedResult = { ...state, trackDetails: data };
+    expect(
+      iTunesProviderReducer(state, {
+        type: iTunesProviderTypes.SUCCESS_GET_TRACK_DETAILS,
+        data
+      })
+    ).toEqual(expectedResult);
+  });
+
+  it('should return state when actio of type CLEAR_TRACK_DETAILS is dispatched', () => {
+    const expectedResult = { ...state };
+    expect(
+      iTunesProviderReducer(state, {
+        type: iTunesProviderTypes.CLEAR_TRACK_DETAILS
+      })
+    ).toEqual(expectedResult);
+  });
+
+  it('should return error message when action of type FAILURE_GET_TRACK_DETAILS is dispatched', () => {
+    const error = { message: 'Internal Server Error' };
+    const expectedResult = { ...state, trackDetailsError: error.message };
+    expect(
+      iTunesProviderReducer(state, {
+        type: iTunesProviderTypes.FAILURE_GET_TRACK_DETAILS,
+        error
+      })
+    ).toEqual(expectedResult);
+  });
 });
