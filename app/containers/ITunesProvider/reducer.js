@@ -4,7 +4,6 @@
  *
  */
 import produce from 'immer';
-import get from 'lodash/get';
 import { createActions } from 'reduxsauce';
 
 export const { Types: iTunesProviderTypes, Creators: iTunesProviderCreators } = createActions({
@@ -53,7 +52,7 @@ export const iTunesProviderReducer = (state = initialState, action) =>
         draft.loading = false;
         break;
       case iTunesProviderTypes.FAILURE_GET_TRACK_DETAILS:
-        draft.trackDetailsError = get(action.error, 'message', 'something_went_wrong');
+        draft.trackDetailsError = action.error;
         break;
     }
   });
