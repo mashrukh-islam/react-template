@@ -24,7 +24,8 @@ export const initialState = {
   tracksError: null,
   trackId: null,
   trackDetails: {},
-  trackDetailsError: null
+  trackDetailsError: null,
+  loading: true
 };
 /* eslint-disable default-case, no-param-reassign */
 export const iTunesProviderReducer = (state = initialState, action) =>
@@ -39,15 +40,17 @@ export const iTunesProviderReducer = (state = initialState, action) =>
         draft.tracks = action.data;
         break;
       case iTunesProviderTypes.FAILURE_GET_TRACK_NAMES:
-        draft.tracksError = get(action.error, 'message', 'something_went_wrong');
+        draft.tracksError = action.error;
         break;
       case iTunesProviderTypes.REQUEST_GET_TRACK_DETAILS:
         draft.trackId = action.trackId;
+        draft.loading = true;
         break;
       case iTunesProviderTypes.CLEAR_TRACK_DETAILS:
         return initialState;
       case iTunesProviderTypes.SUCCESS_GET_TRACK_DETAILS:
         draft.trackDetails = action.data;
+        draft.loading = false;
         break;
       case iTunesProviderTypes.FAILURE_GET_TRACK_DETAILS:
         draft.trackDetailsError = get(action.error, 'message', 'something_went_wrong');

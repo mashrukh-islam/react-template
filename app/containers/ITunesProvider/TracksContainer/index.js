@@ -106,7 +106,7 @@ TracksContainer.propTypes = {
     resultCount: PropTypes.number,
     results: PropTypes.array
   }),
-  tracksError: PropTypes.object
+  tracksError: PropTypes.string
 };
 
 TracksContainer.defaultProps = {

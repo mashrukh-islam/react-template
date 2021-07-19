@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,7 +16,15 @@ import { compose } from 'redux';
 import { useInjectSaga } from '@utils/injectSaga';
 import { iTunesProviderCreators } from '../reducer';
 import T from '@components/T';
-import { makeSelectITunesProvider, selectTrackDetails, selectTrackId, selectTrackDetailsError } from '../selectors';
+import If from '@components/If';
+
+import {
+  makeSelectITunesProvider,
+  selectTrackDetails,
+  selectTrackId,
+  selectTrackDetailsError,
+  selectLoading
+} from '../selectors';
 import saga from '../saga';
 
 const Container = styled.div`
@@ -44,78 +52,93 @@ export function TrackDetailsContainer({
   maxWidth,
   trackDetailsError,
   dispatchClearTrackDetails,
-  dispatchFetchTrackDetails
+  dispatchFetchTrackDetails,
+  loading
 }) {
-  const [loading, setLoading] = useState(true);
   useInjectSaga({ key: 'iTunesProvider', saga });
   const { trackId } = useParams();
+  useEffect(() => {
+    if (!loading) {
+      dispatchFetchTrackDetails(trackId);
+    }
+  }, []);
 
   useEffect(() => {
-    if (loading) {
-      dispatchFetchTrackDetails(trackId);
-      setLoading(false);
+    if (!loading && !trackDetails) {
+      dispatchClearTrackDetails();
     }
-  }, [trackDetails]);
+  }, [trackDetails, loading]);
+
   const renderTrackTime = millis => {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
     return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   };
-  return (
-    <Container maxWidth={maxWidth}>
-      <Card
-        cover={<img src={trackDetails.artworkUrl100} />}
-        actions={[
-          <a href={trackDetails.artistViewUrl} key="artist">
-            <T id="view_artist" />
-          </a>,
-          <a href={trackDetails.collectionViewUrl} key="artist">
-            <T id="view_album" />
-          </a>,
-          <a href={trackDetails.trackViewUrl} key="artist">
-            <T id="view_track" />
-          </a>
-        ]}
-      >
-        <Row>
-          <Col size={1}>
-            <Statistic title={<T id="track_name" />} value={trackDetails.trackCensoredName} />
-            <Statistic title={<T id="album" />} value={trackDetails.collectionName} />
-          </Col>
-          <Col size={1}>
-            <Statistic title={<T id="track_time" />} value={renderTrackTime(trackDetails.trackTimeMillis)} />
-            <Statistic title={<T id="genre" />} value={trackDetails.primaryGenreName} />
-          </Col>
-        </Row>
-        <Row>
-          <Col size={1}>
-            <Statistic title={<T id="explicitness" />} value={trackDetails.trackExplicitness} />
-          </Col>
-          <Col size={1}>
-            <Statistic title={<T id="artist" />} value={trackDetails.artistName} />
-          </Col>
-        </Row>
+  const renderErrorCard = () => {
+    return (
+      <Card>
+        <p>{trackDetailsError}</p>
       </Card>
-    </Container>
+    );
+  };
+  return (
+    <If condition={!loading && trackDetails} otherwise={renderErrorCard()}>
+      <Container maxWidth={maxWidth}>
+        <Card
+          cover={<img src={trackDetails.artworkUrl100} />}
+          actions={[
+            <a href={trackDetails.artistViewUrl} key="artist">
+              <T id="view_artist" />
+            </a>,
+            <a href={trackDetails.collectionViewUrl} key="artist">
+              <T id="view_album" />
+            </a>,
+            <a href={trackDetails.trackViewUrl} key="artist">
+              <T id="view_track" />
+            </a>
+          ]}
+        >
+          <Row>
+            <Col size={1}>
+              <Statistic title={<T id="track_name" />} value={trackDetails.trackCensoredName} />
+              <Statistic title={<T id="album" />} value={trackDetails.collectionName} />
+            </Col>
+            <Col size={1}>
+              <Statistic title={<T id="track_time" />} value={renderTrackTime(trackDetails.trackTimeMillis)} />
+              <Statistic title={<T id="genre" />} value={trackDetails.primaryGenreName} />
+            </Col>
+          </Row>
+          <Row>
+            <Col size={1}>
+              <Statistic title={<T id="explicitness" />} value={trackDetails.trackExplicitness} />
+            </Col>
+            <Col size={1}>
+              <Statistic title={<T id="artist" />} value={trackDetails.artistName} />
+            </Col>
+          </Row>
+        </Card>
+      </Container>
+    </If>
   );
 }
 
 TrackDetailsContainer.propTypes = {
   dispatchFetchTrackDetails: PropTypes.func,
   dispatchClearTrackDetails: PropTypes.func,
+  loading: PropTypes.bool,
   trackDetails: PropTypes.shape({
     artistId: PropTypes.number,
     artistName: PropTypes.string,
-    artistViewUrl: PropTypes.string,
+    artistViewUrl: PropTypes.string.isRequired,
     artworkUrl30: PropTypes.string,
     artworkUrl60: PropTypes.string,
-    artworkUrl100: PropTypes.string,
+    artworkUrl100: PropTypes.string.isRequired,
     collectionCensoredName: PropTypes.string,
     collectionExplicitness: PropTypes.string,
     collectionId: PropTypes.number,
     collectionName: PropTypes.string,
     collectionPrice: PropTypes.number,
-    collectionViewUrl: PropTypes.string,
+    collectionViewUrl: PropTypes.string.isRequired,
     country: PropTypes.string,
     currency: PropTypes.string,
     discCount: PropTypes.number,
@@ -136,21 +159,23 @@ TrackDetailsContainer.propTypes = {
     trackViewUrl: PropTypes.string,
     wrapperType: PropTypes.string
   }),
-  trackDetailsError: PropTypes.object,
+  trackDetailsError: PropTypes.string,
   maxWidth: PropTypes.number
 };
 
 TrackDetailsContainer.defaultProps = {
   tracksDetails: {},
   tracksDetailsError: null,
-  maxWidth: 50
+  maxWidth: 50,
+  loading: true
 };
 
 const mapStateToProps = createStructuredSelector({
   iTunesProvider: makeSelectITunesProvider(),
   trackDetails: selectTrackDetails(),
   trackDetailsError: selectTrackDetailsError(),
-  trackId: selectTrackId()
+  trackId: selectTrackId(),
+  loading: selectLoading()
 });
 
 function mapDispatchToProps(dispatch) {

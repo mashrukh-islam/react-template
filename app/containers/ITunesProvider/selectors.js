@@ -50,6 +50,12 @@ export const selectTrackDetailsError = () =>
     substate => get(substate, 'trackDetailsError', null)
   );
 
+export const selectLoading = () =>
+  createSelector(
+    selectITunesProviderDomain,
+    substate => get(substate, 'loading', null)
+  );
+
 export const selectTrackById = trackId => {
   return createSelector(
     selectITunesProviderDomain,
