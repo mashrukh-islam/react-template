@@ -16,7 +16,6 @@ describe('ITunesProvider saga tests', () => {
   const trackId = 123456;
   let getTracksGenerator = fetchTracks({ artistName });
   let getTrackDetailsGenerator = fetchTrackDetails({ trackId });
-
   it('should start task to watch for REQUEST_GET_TRACK_NAMES action', () => {
     expect(generator.next().value).toEqual(takeLatest(iTunesProviderTypes.REQUEST_GET_TRACK_NAMES, fetchTracks));
   });
@@ -24,9 +23,7 @@ describe('ITunesProvider saga tests', () => {
   it('should ensure that the action FAILURE_GET_TRACK_NAMES is dispatched when the api call fails', () => {
     const res = getTracksGenerator.next().value;
     expect(res).toEqual(call(getTracks, artistName));
-    const errorResponse = {
-      message: 'Internal Server Error'
-    };
+    const errorResponse = 'something_went_wrong';
     expect(getTracksGenerator.next(apiResponseGenerator(false, errorResponse)).value).toEqual(
       put({
         type: iTunesProviderTypes.FAILURE_GET_TRACK_NAMES,
@@ -55,15 +52,12 @@ describe('ITunesProvider saga tests', () => {
     getTrackDetailsGenerator = fetchTrackDetails({ trackId });
     const res = getTrackDetailsGenerator.next().value;
     expect(JSON.stringify(res)).toEqual(JSON.stringify(select(selectTrackById(trackId))));
-    // const trackDetailsResponse = {
-    //   resultCount: 1,
-    //   results: []
-    // };
-    // expect(getTrackDetailsGenerator.next(apiResponseGenerator(true, trackDetailsResponse)).value).toEqual(
-    //   put({
-    //     type: iTunesProviderTypes.SUCCESS_GET_TRACK_DETAILS,
-    //     data: trackDetailsResponse
-    //   })
-    // );
+    const trackDetailsResponse = {};
+    expect(getTrackDetailsGenerator.next(trackDetailsResponse).value).toEqual(
+      put({
+        type: iTunesProviderTypes.SUCCESS_GET_TRACK_DETAILS,
+        data: trackDetailsResponse
+      })
+    );
   });
 });

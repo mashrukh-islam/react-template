@@ -44,8 +44,8 @@ describe('ITunesProvider reducer tests', () => {
   });
 
   it('should return error message when action of type FAILURE_GET_TRACK_NAMES is dispatched', () => {
-    const error = { message: 'Internal Server Error' };
-    const expectedResult = { ...state, tracksError: error.message };
+    const error = 'something_went_wrong';
+    const expectedResult = { ...state, tracksError: error };
     expect(
       iTunesProviderReducer(state, {
         type: iTunesProviderTypes.FAILURE_GET_TRACK_NAMES,
@@ -67,7 +67,7 @@ describe('ITunesProvider reducer tests', () => {
 
   it('should ensure track details are present when action of type SUCCESS_GET_TRACK_DETAILS is dispatched', () => {
     const data = { resultCount: 0, results: [] };
-    const expectedResult = { ...state, trackDetails: data };
+    const expectedResult = { ...state, trackDetails: data, loading: false };
     expect(
       iTunesProviderReducer(state, {
         type: iTunesProviderTypes.SUCCESS_GET_TRACK_DETAILS,
@@ -86,8 +86,8 @@ describe('ITunesProvider reducer tests', () => {
   });
 
   it('should return error message when action of type FAILURE_GET_TRACK_DETAILS is dispatched', () => {
-    const error = { message: 'Internal Server Error' };
-    const expectedResult = { ...state, trackDetailsError: error.message };
+    const error = 'something_went_wrong';
+    const expectedResult = { ...state, trackDetailsError: error };
     expect(
       iTunesProviderReducer(state, {
         type: iTunesProviderTypes.FAILURE_GET_TRACK_DETAILS,
