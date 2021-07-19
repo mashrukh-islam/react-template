@@ -32,11 +32,13 @@ export const iTunesProviderReducer = (state = initialState, action) =>
     switch (action.type) {
       case iTunesProviderTypes.REQUEST_GET_TRACK_NAMES:
         draft.artistName = action.artistName;
+        draft.loading = true;
         break;
       case iTunesProviderTypes.CLEAR_TRACK_NAMES:
         return initialState;
       case iTunesProviderTypes.SUCCESS_GET_TRACK_NAMES:
         draft.tracks = action.data;
+        draft.loading = false;
         break;
       case iTunesProviderTypes.FAILURE_GET_TRACK_NAMES:
         draft.tracksError = action.error;

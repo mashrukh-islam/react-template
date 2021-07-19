@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
@@ -16,7 +16,13 @@ import { Input, Skeleton } from 'antd';
 import styled from 'styled-components';
 import { compose } from 'redux';
 import { useInjectSaga } from '@utils/injectSaga';
-import { makeSelectITunesProvider, selectTracksData, selectArtistName, selectTracksError } from '../selectors';
+import {
+  makeSelectITunesProvider,
+  selectTracksData,
+  selectArtistName,
+  selectTracksError,
+  selectLoading
+} from '../selectors';
 import For from '@components/For';
 import { iTunesProviderCreators } from '../reducer';
 import saga from '../saga';
@@ -39,29 +45,22 @@ export function TracksContainer({
   dispatchClearTracks,
   artistName,
   tracks,
-  tracksError
+  tracksError,
+  loading
 }) {
   useInjectSaga({ key: 'iTunesProvider', saga });
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const loaded = get(tracks, 'results', null) || tracksError;
-    if (loading && loaded) {
-      setLoading(false);
+    if (artistName && !tracks?.results?.length && loading) {
+      dispatchFetchTracks(artistName);
+    } else if (tracks && loading) {
+      dispatchClearTracks();
     }
   }, [tracks]);
-
-  useEffect(() => {
-    if (artistName && !tracks?.results?.length) {
-      dispatchFetchTracks(artistName);
-      setLoading(true);
-    }
-  }, []);
 
   const handleOnChange = aName => {
     if (!isEmpty(aName)) {
       dispatchFetchTracks(aName);
-      setLoading(true);
     } else {
       dispatchClearTracks();
     }
@@ -106,6 +105,7 @@ TracksContainer.propTypes = {
     resultCount: PropTypes.number,
     results: PropTypes.array
   }),
+  loading: PropTypes.bool,
   tracksError: PropTypes.string
 };
 
@@ -119,7 +119,8 @@ const mapStateToProps = createStructuredSelector({
   iTunesProvider: makeSelectITunesProvider(),
   tracks: selectTracksData(),
   tracksError: selectTracksError(),
-  artistName: selectArtistName()
+  artistName: selectArtistName(),
+  loading: selectLoading()
 });
 
 function mapDispatchToProps(dispatch) {

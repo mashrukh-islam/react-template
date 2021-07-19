@@ -25,7 +25,7 @@ describe('ITunesProvider reducer tests', () => {
 
   it('should ensure track data is present when action of type SUCCESS_GET_TRACK_NAMES is dispatched', () => {
     const data = { resultCount: 0, results: [] };
-    const expectedResult = { ...state, tracks: data };
+    const expectedResult = { ...state, tracks: data, loading: false };
     expect(
       iTunesProviderReducer(state, {
         type: iTunesProviderTypes.SUCCESS_GET_TRACK_NAMES,
