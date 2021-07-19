@@ -14,5 +14,9 @@ export function IntlGlobalProvider({ children }) {
 export function appIntl() {
   return intl;
 }
+// Set intl value for translate in saga tests
+export const setIntl = i => {
+  intl = i;
+};
 
 export const translate = (id, values = {}) => intl.formatMessage({ id }, values);

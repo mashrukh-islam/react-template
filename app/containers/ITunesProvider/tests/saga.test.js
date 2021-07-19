@@ -5,12 +5,17 @@
 /* eslint-disable redux-saga/yield-effects */
 import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { getTracks } from '@services/itunesApi';
-import { apiResponseGenerator } from '@utils/testUtils';
+import { apiResponseGenerator, intlProvider } from '@utils/testUtils';
 import iTunesProviderSaga, { fetchTrackDetails, fetchTracks } from '../saga';
 import { iTunesProviderTypes } from '../reducer';
 import { selectTrackById } from '../selectors';
+import { setIntl, translate } from '@components/IntlGlobalProvider';
 
 describe('ITunesProvider saga tests', () => {
+  beforeAll(() => {
+    setIntl(intlProvider());
+  });
+
   const generator = iTunesProviderSaga();
   const artistName = 'Opeth';
   const trackId = 123456;
@@ -23,7 +28,7 @@ describe('ITunesProvider saga tests', () => {
   it('should ensure that the action FAILURE_GET_TRACK_NAMES is dispatched when the api call fails', () => {
     const res = getTracksGenerator.next().value;
     expect(res).toEqual(call(getTracks, artistName));
-    const errorResponse = 'something_went_wrong';
+    const errorResponse = translate('something_went_wrong');
     expect(getTracksGenerator.next(apiResponseGenerator(false, errorResponse)).value).toEqual(
       put({
         type: iTunesProviderTypes.FAILURE_GET_TRACK_NAMES,

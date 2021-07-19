@@ -17,7 +17,6 @@ import { useInjectSaga } from '@utils/injectSaga';
 import { iTunesProviderCreators } from '../reducer';
 import T from '@components/T';
 import If from '@components/If';
-import { translate } from '@app/components/IntlGlobalProvider/index';
 import {
   makeSelectITunesProvider,
   selectTrackDetails,
@@ -78,7 +77,7 @@ export function TrackDetailsContainer({
     return (
       <Card>
         <If condition={trackDetailsError} otherwise={null}>
-          <p>{translate(trackDetailsError)}</p>
+          <p>{trackDetailsError}</p>
         </If>
       </Card>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider, createIntl, createIntlCache } from 'react-intl';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
@@ -15,6 +15,18 @@ export const renderWithIntl = children =>
       <IntlGlobalProvider>{children}</IntlGlobalProvider>
     </IntlProvider>
   );
+
+export const intlProvider = () => {
+  const cache = createIntlCache();
+  const intl = createIntl(
+    {
+      locale: DEFAULT_LOCALE,
+      messages: translationMessages[DEFAULT_LOCALE]
+    },
+    cache
+  );
+  return intl;
+};
 
 export const getComponentStyles = (Component, props = {}) => {
   renderWithIntl(Component(props));

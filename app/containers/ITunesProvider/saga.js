@@ -3,6 +3,7 @@ import { iTunesProviderTypes, iTunesProviderCreators } from './reducer';
 import { getTracks, getTrackDetails } from '@services/itunesApi';
 import get from 'lodash/get';
 import { selectTrackById, selectTracksData } from './selectors';
+import { translate } from '@components/IntlGlobalProvider/index';
 // Individual exports for testing
 const { REQUEST_GET_TRACK_NAMES, REQUEST_GET_TRACK_DETAILS } = iTunesProviderTypes;
 const {
@@ -18,7 +19,7 @@ export function* fetchTracks(action) {
   if (ok) {
     yield put(successGetTrackNames(data));
   } else {
-    yield put(failureGetTrackNames(get(data, 'message', 'something_went_wrong')));
+    yield put(failureGetTrackNames(get(data, 'message', translate('something_went_wrong'))));
   }
 }
 
@@ -35,7 +36,7 @@ export function* fetchTrackDetails(action) {
       yield put(successGetTrackNames({ ...tracks, trackToInsert }));
       yield put(successGetTrackDetails(data.results[0]));
     } else {
-      yield put(failureGetTrackDetails(get(data, 'message', 'something_went_wrong')));
+      yield put(failureGetTrackDetails(get(data, 'message', translate('something_went_wrong'))));
     }
   }
 }
