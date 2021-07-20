@@ -165,10 +165,9 @@ TrackDetailsContainer.propTypes = {
 };
 
 TrackDetailsContainer.defaultProps = {
-  tracksDetails: {},
-  tracksDetailsError: null,
-  maxWidth: 50,
-  loading: true
+  trackDetails: null,
+  trackDetailsError: null,
+  maxWidth: 50
 };
 
 const mapStateToProps = createStructuredSelector({

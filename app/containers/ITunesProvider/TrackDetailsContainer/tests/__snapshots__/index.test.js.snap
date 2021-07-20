@@ -1,0 +1,269 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TrackDetailsContainer /> tests should render and match snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="TrackDetailsContainer__Container-par8y9-0 beoNmx"
+    >
+      <div
+        class="ant-card ant-card-bordered"
+      >
+        <div
+          class="ant-card-cover"
+        >
+          <img />
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="TrackDetailsContainer__Row-par8y9-1 fkOSsM"
+          >
+            <div
+              class="TrackDetailsContainer__Col-par8y9-2 cFWTCU"
+              size="1"
+            >
+              <div
+                class="ant-statistic"
+              >
+                <div
+                  class="ant-statistic-title"
+                >
+                  <p
+                    class="T__StyledText-gjlic1-0 cbAvsY"
+                    data-testid="t"
+                  >
+                    Track Name
+                  </p>
+                </div>
+                <div
+                  class="ant-statistic-content"
+                >
+                  <span
+                    class="ant-statistic-content-value"
+                  >
+                    <span
+                      class="ant-statistic-content-value-int"
+                    >
+                      
+                      0
+                    </span>
+                    
+                  </span>
+                </div>
+              </div>
+              <div
+                class="ant-statistic"
+              >
+                <div
+                  class="ant-statistic-title"
+                >
+                  <p
+                    class="T__StyledText-gjlic1-0 cbAvsY"
+                    data-testid="t"
+                  >
+                    Album
+                  </p>
+                </div>
+                <div
+                  class="ant-statistic-content"
+                >
+                  <span
+                    class="ant-statistic-content-value"
+                  >
+                    <span
+                      class="ant-statistic-content-value-int"
+                    >
+                      
+                      0
+                    </span>
+                    
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="TrackDetailsContainer__Col-par8y9-2 cFWTCU"
+              size="1"
+            >
+              <div
+                class="ant-statistic"
+              >
+                <div
+                  class="ant-statistic-title"
+                >
+                  <p
+                    class="T__StyledText-gjlic1-0 cbAvsY"
+                    data-testid="t"
+                  >
+                    Track Time
+                  </p>
+                </div>
+                <div
+                  class="ant-statistic-content"
+                >
+                  <span
+                    class="ant-statistic-content-value"
+                  >
+                    NaN:NaN
+                  </span>
+                </div>
+              </div>
+              <div
+                class="ant-statistic"
+              >
+                <div
+                  class="ant-statistic-title"
+                >
+                  <p
+                    class="T__StyledText-gjlic1-0 cbAvsY"
+                    data-testid="t"
+                  >
+                    Genre
+                  </p>
+                </div>
+                <div
+                  class="ant-statistic-content"
+                >
+                  <span
+                    class="ant-statistic-content-value"
+                  >
+                    <span
+                      class="ant-statistic-content-value-int"
+                    >
+                      
+                      0
+                    </span>
+                    
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="TrackDetailsContainer__Row-par8y9-1 fkOSsM"
+          >
+            <div
+              class="TrackDetailsContainer__Col-par8y9-2 cFWTCU"
+              size="1"
+            >
+              <div
+                class="ant-statistic"
+              >
+                <div
+                  class="ant-statistic-title"
+                >
+                  <p
+                    class="T__StyledText-gjlic1-0 cbAvsY"
+                    data-testid="t"
+                  >
+                    Explicitness
+                  </p>
+                </div>
+                <div
+                  class="ant-statistic-content"
+                >
+                  <span
+                    class="ant-statistic-content-value"
+                  >
+                    <span
+                      class="ant-statistic-content-value-int"
+                    >
+                      
+                      0
+                    </span>
+                    
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="TrackDetailsContainer__Col-par8y9-2 cFWTCU"
+              size="1"
+            >
+              <div
+                class="ant-statistic"
+              >
+                <div
+                  class="ant-statistic-title"
+                >
+                  <p
+                    class="T__StyledText-gjlic1-0 cbAvsY"
+                    data-testid="t"
+                  >
+                    Artist
+                  </p>
+                </div>
+                <div
+                  class="ant-statistic-content"
+                >
+                  <span
+                    class="ant-statistic-content-value"
+                  >
+                    <span
+                      class="ant-statistic-content-value-int"
+                    >
+                      
+                      0
+                    </span>
+                    
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul
+          class="ant-card-actions"
+        >
+          <li
+            style="width: 33.333333333333336%;"
+          >
+            <span>
+              <a
+                href=""
+              >
+                <p
+                  class="T__StyledText-gjlic1-0 cbAvsY"
+                  data-testid="t"
+                >
+                  View Artist
+                </p>
+              </a>
+            </span>
+          </li>
+          <li
+            style="width: 33.333333333333336%;"
+          >
+            <span>
+              <a>
+                <p
+                  class="T__StyledText-gjlic1-0 cbAvsY"
+                  data-testid="t"
+                >
+                  View Album
+                </p>
+              </a>
+            </span>
+          </li>
+          <li
+            style="width: 33.333333333333336%;"
+          >
+            <span>
+              <a>
+                <p
+                  class="T__StyledText-gjlic1-0 cbAvsY"
+                  data-testid="t"
+                >
+                  View Track
+                </p>
+              </a>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+`;

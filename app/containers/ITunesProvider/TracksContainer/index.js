@@ -86,6 +86,7 @@ export function TracksContainer({
   return (
     <Container maxWidth={maxWidth}>
       <Search
+        data-testid="tracks-search-bar"
         defaultValue={artistName}
         type="text"
         onChange={event => debouncedHandleOnChange(event.target.value)}
