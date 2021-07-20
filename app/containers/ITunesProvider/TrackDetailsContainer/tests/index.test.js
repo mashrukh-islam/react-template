@@ -2,7 +2,6 @@ import React from 'react';
 import { timeout, renderProvider } from '@utils/testUtils';
 import { TrackDetailsContainerTest as TrackDetailsContainer } from '../index';
 import { cleanup } from '@testing-library/react';
-import { translate } from '@components/IntlGlobalProvider';
 
 describe('<TrackDetailsContainer /> tests', () => {
   let submitSpy;
@@ -14,7 +13,12 @@ describe('<TrackDetailsContainer /> tests', () => {
 
   beforeEach(() => {
     submitSpy = jest.fn();
-    trackDetails = { artistViewUrl: '', artworkUrl100: '', collectionViewUrl: '', trackViewUrl: '' };
+    trackDetails = {
+      artistViewUrl: 'https://music.apple.com/us/artist/opeth/3196120?uo=4',
+      artworkUrl100: 'https://music.apple.com/us/artist/opeth/3196120?uo=4',
+      collectionViewUrl: 'https://music.apple.com/us/artist/opeth/3196120?uo=4',
+      trackViewUrl: 'https://music.apple.com/us/artist/opeth/3196120?uo=4'
+    };
   });
 
   it('should render and match snapshot', () => {
@@ -38,28 +42,16 @@ describe('<TrackDetailsContainer /> tests', () => {
     expect(getTrackDetailsSpy).toBeCalled();
   });
 
-  it('should ensure that artwork is rendered', async () => {
+  it('should ensure that one Detail Card is rendered', () => {
+    const getTrackDetailsSpy = jest.fn();
+    const clearTrackDetailsSpy = jest.fn();
     const { getAllByTestId } = renderProvider(
-      <TrackDetailsContainer dispatchFetchTrackDetails={submitSpy} trackDetails={trackDetails} />
+      <TrackDetailsContainer
+        dispatchFetchTrackDetails={getTrackDetailsSpy}
+        dispatchClearTrackDetails={clearTrackDetailsSpy}
+        trackDetails={trackDetails}
+      />
     );
-    expect(getAllByTestId('artwork-card')).toHaveLength(1);
-  });
-
-  it('should ensure that actions are rendered', async () => {
-    const { getByTestId } = renderProvider(
-      <TrackDetailsContainer dispatchFetchTrackDetails={submitSpy} trackDetails={trackDetails} />
-    );
-    expect(getByTestId('view-album-text').textContent).toEqual(translate('view_album'));
-    expect(getByTestId('view-artist-text').textContent).toEqual(translate('view_artist'));
-    expect(getByTestId('view-track-text').textContent).toEqual(translate('view_track'));
-  });
-
-  it('should ensure that links have correct source', async () => {
-    const { getByTestId } = renderProvider(
-      <TrackDetailsContainer dispatchFetchTrackDetails={submitSpy} trackDetails={trackDetails} />
-    );
-    expect(getByTestId('artist-view-link').getAttribute('href')).toBe('');
-    expect(getByTestId('album-view-link').getAttribute('href')).toBe('');
-    expect(getByTestId('track-view-link').getAttribute('href')).toBe('');
+    expect(getAllByTestId('detail-card')).toHaveLength(1);
   });
 });
