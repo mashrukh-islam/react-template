@@ -2,7 +2,7 @@ import React from 'react';
 import { IntlProvider, createIntl, createIntlCache } from 'react-intl';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { browserHistory, MemoryRouter, Route } from 'react-router-dom';
+import { browserHistory } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import configureStore from '@app/configureStore';
 import { DEFAULT_LOCALE, translationMessages } from '@app/i18n';
@@ -35,13 +35,7 @@ export const getComponentStyles = (Component, props = {}) => {
   // eslint-disable-next-line no-underscore-dangle
   return window.getComputedStyle(componentRoots[0])._values;
 };
-export const renderWithRouter = (children, { route, path }) => {
-  return (
-    <MemoryRouter initialEntries={[route]}>
-      <Route path={path}>{children}</Route>
-    </MemoryRouter>
-  );
-};
+
 export const renderProvider = children => {
   const store = configureStore({}, browserHistory).store;
   return render(
