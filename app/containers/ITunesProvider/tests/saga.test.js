@@ -4,7 +4,7 @@
 
 /* eslint-disable redux-saga/yield-effects */
 import { takeLatest, call, put, select } from 'redux-saga/effects';
-import { getTracks } from '@services/itunesApi';
+import { getTracks, getTrackDetails } from '@services/itunesApi';
 import { apiResponseGenerator, intlProvider } from '@utils/testUtils';
 import iTunesProviderSaga, { fetchTrackDetails, fetchTracks } from '../saga';
 import { iTunesProviderTypes } from '../reducer';
@@ -62,6 +62,39 @@ describe('ITunesProvider saga tests', () => {
       put({
         type: iTunesProviderTypes.SUCCESS_GET_TRACK_DETAILS,
         data: trackDetailsResponse
+      })
+    );
+  });
+
+  it('should ensure that the action SUCCESS_GET_TRACK_DETAILS is dispatched when the API call succeeds', () => {
+    getTrackDetailsGenerator = fetchTrackDetails({ trackId });
+    const res = getTrackDetailsGenerator.next().value;
+    expect(JSON.stringify(res)).toBe(JSON.stringify(select(selectTrackById(trackId))));
+    const trackDetailsResponse = null;
+    expect(getTrackDetailsGenerator.next(trackDetailsResponse).value).toEqual(call(getTrackDetails, trackId));
+    const trackDetailsApiResponse = {
+      resultCount: 1,
+      results: [{ artistId: 45678 }]
+    };
+    expect(getTrackDetailsGenerator.next(apiResponseGenerator(true, trackDetailsApiResponse)).value).toEqual(
+      put({
+        type: iTunesProviderTypes.SUCCESS_GET_TRACK_DETAILS,
+        data: trackDetailsApiResponse.results[0]
+      })
+    );
+  });
+
+  it('should ensure that the action FAILURE_GET_TRACK_DETAILS is dispatched when the API call fails', () => {
+    getTrackDetailsGenerator = fetchTrackDetails({ trackId });
+    const res = getTrackDetailsGenerator.next().value;
+    expect(JSON.stringify(res)).toEqual(JSON.stringify(select(selectTrackById(trackId))));
+    const trackDetailsResponse = null;
+    expect(getTrackDetailsGenerator.next(trackDetailsResponse).value).toEqual(call(getTrackDetails, trackId));
+    const errorResponse = translate('something_went_wrong');
+    expect(getTrackDetailsGenerator.next(apiResponseGenerator(false, errorResponse)).value).toEqual(
+      put({
+        type: iTunesProviderTypes.FAILURE_GET_TRACK_DETAILS,
+        error: errorResponse
       })
     );
   });

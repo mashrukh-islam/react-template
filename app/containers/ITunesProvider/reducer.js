@@ -50,6 +50,7 @@ export const iTunesProviderReducer = (state = initialState, action) =>
       case iTunesProviderTypes.CLEAR_TRACK_DETAILS:
         return initialState;
       case iTunesProviderTypes.SUCCESS_GET_TRACK_DETAILS:
+        draft.tracks = { ...state.tracks, ...action.data };
         draft.trackDetails = action.data;
         draft.loading = false;
         break;

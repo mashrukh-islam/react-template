@@ -2,9 +2,9 @@ import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { iTunesProviderTypes, iTunesProviderCreators } from './reducer';
 import { getTracks, getTrackDetails } from '@services/itunesApi';
 import get from 'lodash/get';
-import { selectTrackById, selectTracksData } from './selectors';
+import { selectTrackById } from './selectors';
 import { translate } from '@components/IntlGlobalProvider/index';
-// Individual exports for testing
+
 const { REQUEST_GET_TRACK_NAMES, REQUEST_GET_TRACK_DETAILS } = iTunesProviderTypes;
 const {
   successGetTrackNames,
@@ -31,9 +31,6 @@ export function* fetchTrackDetails(action) {
     const response = yield call(getTrackDetails, action.trackId);
     const { data, ok } = response;
     if (ok) {
-      const tracks = yield select(selectTracksData());
-      const trackToInsert = data.results[0];
-      yield put(successGetTrackNames({ ...tracks, trackToInsert }));
       yield put(successGetTrackDetails(data.results[0]));
     } else {
       yield put(failureGetTrackDetails(get(data, 'message', translate('something_went_wrong'))));
