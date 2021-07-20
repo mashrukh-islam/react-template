@@ -8,11 +8,14 @@ exports[`<TrackDetailsContainer /> tests should render and match snapshot 1`] = 
     >
       <div
         class="ant-card ant-card-bordered"
+        data-testid="artwork-card"
       >
         <div
           class="ant-card-cover"
         >
-          <img />
+          <img
+            src=""
+          />
         </div>
         <div
           class="ant-card-body"
@@ -222,11 +225,12 @@ exports[`<TrackDetailsContainer /> tests should render and match snapshot 1`] = 
           >
             <span>
               <a
+                data-testid="artist-view-link"
                 href=""
               >
                 <p
                   class="T__StyledText-gjlic1-0 cbAvsY"
-                  data-testid="t"
+                  data-testid="view-artist-text"
                 >
                   View Artist
                 </p>
@@ -237,10 +241,13 @@ exports[`<TrackDetailsContainer /> tests should render and match snapshot 1`] = 
             style="width: 33.333333333333336%;"
           >
             <span>
-              <a>
+              <a
+                data-testid="album-view-link"
+                href=""
+              >
                 <p
                   class="T__StyledText-gjlic1-0 cbAvsY"
-                  data-testid="t"
+                  data-testid="view-album-text"
                 >
                   View Album
                 </p>
@@ -251,10 +258,13 @@ exports[`<TrackDetailsContainer /> tests should render and match snapshot 1`] = 
             style="width: 33.333333333333336%;"
           >
             <span>
-              <a>
+              <a
+                data-testid="track-view-link"
+                href=""
+              >
                 <p
                   class="T__StyledText-gjlic1-0 cbAvsY"
-                  data-testid="t"
+                  data-testid="view-track-text"
                 >
                   View Track
                 </p>

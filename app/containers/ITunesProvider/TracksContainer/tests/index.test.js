@@ -6,8 +6,14 @@ import { TracksContainerTest as TracksContainer } from '../index';
 
 describe('<TracksContainer/> tests', () => {
   let submitSpy;
+  let tracks;
+
   beforeEach(() => {
     submitSpy = jest.fn();
+    tracks = {
+      resultCount: 2,
+      results: [{ trackName: 'trackOne' }, { trackName: 'trackTwo' }]
+    };
   });
 
   it('should render and match snapshot', () => {
@@ -40,5 +46,10 @@ describe('<TracksContainer/> tests', () => {
     });
     await timeout(500);
     expect(submitSpy).toBeCalled();
+  });
+
+  it('should ensure that correct number of tracks are rendered', async () => {
+    const { getAllByTestId } = renderProvider(<TracksContainer dispatchFetchTracks={submitSpy} tracks={tracks} />);
+    expect(getAllByTestId('track-card')).toHaveLength(2);
   });
 });

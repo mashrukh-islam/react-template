@@ -86,16 +86,17 @@ export function TrackDetailsContainer({
     <If condition={!loading && trackDetails} otherwise={renderErrorCard()}>
       <Container maxWidth={maxWidth}>
         <Card
+          data-testid="artwork-card"
           cover={<img src={trackDetails.artworkUrl100} />}
           actions={[
-            <a href={trackDetails.artistViewUrl} key="artist">
-              <T id="view_artist" />
+            <a href={trackDetails.artistViewUrl} key="artist" data-testid="artist-view-link">
+              <T id="view_artist" data-testid="view-artist-text" />
             </a>,
-            <a href={trackDetails.collectionViewUrl} key="artist">
-              <T id="view_album" />
+            <a href={trackDetails.collectionViewUrl} key="artist" data-testid="album-view-link">
+              <T id="view_album" data-testid="view-album-text" />
             </a>,
-            <a href={trackDetails.trackViewUrl} key="artist">
-              <T id="view_track" />
+            <a href={trackDetails.trackViewUrl} key="artist" data-testid="track-view-link">
+              <T id="view_track" data-testid="view-track-text" />
             </a>
           ]}
         >
