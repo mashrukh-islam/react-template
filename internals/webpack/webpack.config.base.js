@@ -26,7 +26,7 @@ module.exports = options => ({
     {
       // Compile into js/build.js
       path: path.resolve(process.cwd(), 'build'),
-      publicPath: process.env.NODE_ENV === 'production' ? '/mashrukh-islam/iTunesSearch' : '/'
+      publicPath: process.env.NODE_ENV === 'production' ? '/mashrukh-islam/iTunesSearch/' : '/'
     },
     options.output
   ), // Merge with env dependent settings
