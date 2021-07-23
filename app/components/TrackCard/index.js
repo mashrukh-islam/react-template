@@ -50,7 +50,7 @@ function TrackCard({ track, padding }) {
       <Card
         title={track.trackName}
         extra={
-          <a href={`${process.env.NODE_ENV === 'production' ? process.env.BASE_URL : ''}/track/${track.trackId}`}>
+          <a href={`${process.env.NODE_ENV === 'production' ? process.env.BASE_URL : '/'}track/${track.trackId}`}>
             <T id="see_more" />
           </a>
         }
