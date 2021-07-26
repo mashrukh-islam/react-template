@@ -43,6 +43,6 @@ jobs:
       - name: Update PR
         uses: tzkhan/pr-update-action@v2
         with:
-          repo_token: ${{ env.GITHUB_TOKEN }}
-          body_template: http://${{ env.AWS_S3_BUCKET }}}.s3-website.${{ env.AWS_REGSION }}.amazonaws.com/${{ env.DEST_DIR }}/
+          repo-token: ${{ env.GITHUB_TOKEN }}
+          body-template: http://${{ env.AWS_S3_BUCKET }}}.s3-website.${{ env.AWS_REGSION }}.amazonaws.com/${{ env.DEST_DIR }}/
 
