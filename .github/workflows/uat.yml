@@ -45,5 +45,5 @@ jobs:
         with:
           base-branch-regex: '[a-z]'
           repo-token: ${{ env.GITHUB_TOKEN }}
-          body-template: http://${{ env.AWS_S3_BUCKET }}}.s3-website.${{ env.AWS_REGION }}.amazonaws.com/${{ env.DEST_DIR }}/
+          body-template: http://${{ env.AWS_S3_BUCKET }}.s3-website.${{ env.AWS_REGION }}.amazonaws.com/${{ env.DEST_DIR }}/
 
