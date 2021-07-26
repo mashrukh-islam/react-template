@@ -41,8 +41,8 @@ jobs:
         with:
           args: --acl public-read --follow-symlinks 
       - name: Update PR
-        uses: kt3k/update-pr-description@v1.0.1
+        uses: tzkhan/pr-update-action@v2
         with:
-          github_token: ${{ env.GITHUB_TOKEN }}
-          pr_body: http://${{ env.AWS_S3_BUCKET }}}.s3-website.${{ env.AWS_REGSION }}.amazonaws.com/${{ env.DEST_DIR }}/
+          repo_token: ${{ env.GITHUB_TOKEN }}
+          body_template: http://${{ env.AWS_S3_BUCKET }}}.s3-website.${{ env.AWS_REGSION }}.amazonaws.com/${{ env.DEST_DIR }}/
 
